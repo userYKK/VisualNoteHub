@@ -1,5 +1,12 @@
 <template>
-  <el-button type="success" size="mini">成功按钮</el-button>
+  <el-button
+    :type="head.btnType || 'primary'"
+    size="mini"
+    :class="head.cla"
+    @click="$emit('operateEvent', { head })"
+  >
+    {{ (data && data[head.key]) || head.btnTitle }}
+  </el-button>
 </template>
 <script>
 export default {

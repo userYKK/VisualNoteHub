@@ -1,13 +1,9 @@
 <template>
-  <div>
-    <el-radio v-model="value" label="1" v-for="item in head.radioList" :key="item.id">
-      {{ item.text }}
-    </el-radio>
-  </div>
+  <div v-html="value"></div>
 </template>
 <script>
 export default {
-  name: "v-radio",
+  name: "v-html",
   props: {
     head: {
       type: Object,
@@ -17,9 +13,17 @@ export default {
       type: Object,
       default: () => {},
     },
+    isDisabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return { value: "" };
+  },
+  mounted() {
+    const { head, data } = this;
+    this.value = data[head.key];
   },
 };
 </script>

@@ -1,5 +1,6 @@
 <template>
   <el-date-picker
+    size="mini"
     v-model="value"
     align="right"
     type="date"

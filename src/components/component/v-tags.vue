@@ -3,7 +3,7 @@
     <el-tag
       :key="tag"
       v-for="tag in dynamicTags"
-      closable
+      :closable="!isDisabled"
       :disable-transitions="false"
       @close="handleClose(tag)"
     >
@@ -14,9 +14,8 @@
       v-if="inputVisible"
       v-model="inputValue"
       ref="saveTagInput"
-      size="small"
+      size="mini"
       @keyup.enter.native="handleInputConfirm"
-      @blur="handleInputConfirm"
     >
     </el-input>
   </div>
@@ -33,34 +32,54 @@ export default {
       type: Object,
       default: () => {},
     },
+    isDisabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  watch: {
+    isDisabled() {
+      this.visible = !this.isDisabled;
+    },
+  },
+  computed: {
+    inputVisible() {
+      return this.visible;
+    },
   },
   data() {
     return {
-      dynamicTags: ["标签一", "标签二", "标签三"],
-      inputVisible: false,
+      dynamicTags: [
+        "标签一标签一标签一标签一标签一标签一标签一标签一",
+        "标签二",
+        "标签三",
+      ],
+      visible: false,
       inputValue: "",
     };
+  },
+  mounted() {
+    this.visible = !this.isDisabled;
   },
   methods: {
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
-
-    showInput() {
-      this.inputVisible = true;
-      this.$nextTick((_) => {
-        this.$refs.saveTagInput.$refs.input.focus();
-      });
-    },
-
     handleInputConfirm() {
       let inputValue = this.inputValue;
       if (inputValue) {
         this.dynamicTags.push(inputValue);
       }
-      this.inputVisible = false;
       this.inputValue = "";
     },
   },
 };
 </script>
+<style lang="scss" scope>
+.el-tag {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 5px 2px 0;
+}
+</style>

@@ -1,5 +1,7 @@
 <template>
-  <el-link type="primary" :disabled="false" :underline="false">主要链接</el-link>
+  <el-link :type="head.linkType" :disabled="isDisabled" :underline="head.linkUnderline">{{
+    data[head.key]
+  }}</el-link>
 </template>
 <script>
 export default {
@@ -12,6 +14,10 @@ export default {
     data: {
       type: Object,
       default: () => {},
+    },
+    isDisabled: {
+      type: Boolean,
+      default: false,
     },
   },
 };

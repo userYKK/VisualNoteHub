@@ -1,12 +1,12 @@
 <template>
   <el-container>
     <Menu></Menu>
-    <el-container>
+    <el-container class="is-vertical">
       <Header></Header>
       <el-main>
         <router-view></router-view>
       </el-main>
-      <el-footer>Footer</el-footer>
+      <!-- <el-footer>Footer</el-footer> -->
     </el-container>
   </el-container>
 </template>
@@ -49,6 +49,6 @@ export default {
   background-color: #e9eef3;
   color: #333;
   text-align: center;
-  line-height: 160px;
+  line-height: 1.5;
 }
 </style>

@@ -5,4 +5,6 @@ export default {
     role: '',
     disabled: '',
     jump: '',
+    rowKey: 'plId',
+    rowNameKey: 'plTitle',
 }
