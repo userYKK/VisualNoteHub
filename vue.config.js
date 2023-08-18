@@ -17,6 +17,7 @@ module.exports = {
     plugins: [
       new webpack.ProvidePlugin({
         $: 'jquery',
+        CKEDITOR: 'CKEDITOR',
         jQuery: 'jquery',
         'window.jQuery': 'jquery',
         Popper: ['popper.js', 'default']

@@ -3,7 +3,7 @@
     <component
       v-for="item in filterList"
       :key="item.key"
-      :is="item.slot"
+      :is="item.defaultSlot"
       :head="item"
       @operateEvent="$emit('operateEvent', $event)"
     ></component>

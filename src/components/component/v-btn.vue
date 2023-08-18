@@ -3,7 +3,7 @@
     :type="head.btnType || 'primary'"
     size="mini"
     :class="head.cla"
-    @click="$emit('operateEvent', { head })"
+    @click.stop="$emit('operateEvent', { type: 'btnChange', head })"
   >
     {{ (data && data[head.key]) || head.btnTitle }}
   </el-button>

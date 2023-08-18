@@ -3,7 +3,7 @@
     v-if="isDisabled || parentType === 'table'"
     @click.stop
     style="width: 50px; height: 50px"
-    :src="data[head.key]"
+    :src="url"
     :preview-src-list="srcList"
   >
   </el-image>
@@ -41,7 +41,9 @@ export default {
   },
   mounted() {
     const { data, head } = this;
-    this.srcList = [data[head.key]];
+    if (!data) return;
+    this.url = data[head.key];
+    this.srcList = [this.url];
   },
 };
 </script>

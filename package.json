@@ -15,8 +15,8 @@
     "vue": "^2.6.14",
     "vue-router": "^3.4.3",
     "vuex": "^3.5.1",
+    "clipboard": "^2.0.11",
     "element-ui": "^2.9.2"
-
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

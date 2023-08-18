@@ -1,6 +1,6 @@
 <template>
   <el-input-number
-    v-if="isDisabled"
+    v-if="!isDisabled"
     size="mini"
     v-model="value"
     controls-position="right"
@@ -8,7 +8,7 @@
     :min="1"
     :max="100"
   ></el-input-number>
-  <span v-else>{{value}}</span>
+  <span v-else>{{ value }}</span>
 </template>
 <script>
 export default {
@@ -24,7 +24,7 @@ export default {
     },
     isDisabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
   },
   data() {
@@ -32,16 +32,23 @@ export default {
       value: 1,
     };
   },
-  mounted(){
-    const {head, data}  = this;
+  mounted() {
+    const { head, data } = this;
+    if (!data) return;
     this.value = data[head.key];
   },
   methods: {
     handleChange() {
-      const {head, data, value: changeValue}  = this;
-      this.$emit('operateEvent', {type: 'inputNumberChange', head, data, changeValue, cal: ()=>{
-        this.$message.warning('修改成功')
-      }})
+      const { head, data, value: changeValue } = this;
+      this.$emit("operateEvent", {
+        type: "inputNumberChange",
+        head,
+        data,
+        changeValue,
+        cal: () => {
+          this.$message.warning("修改成功");
+        },
+      });
     },
   },
 };

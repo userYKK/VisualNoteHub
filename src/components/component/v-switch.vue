@@ -1,5 +1,11 @@
 <template>
-  <el-switch v-model="value" active-color="#13ce66" inactive-color="#ff4949" :disabled="isDisabled"> </el-switch>
+  <el-switch
+    v-model="value"
+    active-color="#13ce66"
+    inactive-color="#ff4949"
+    :disabled="isDisabled"
+  >
+  </el-switch>
 </template>
 <script>
 export default {
@@ -16,15 +22,16 @@ export default {
     isDisabled: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   data() {
     return {
       value: true,
     };
   },
-  mounted(){
-    const {head, data}  = this;
+  mounted() {
+    const { head, data } = this;
+    if (!data) return;
     this.value = data[head.key];
   },
 };

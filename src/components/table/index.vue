@@ -14,7 +14,9 @@
           :key="head.key"
           :label="head.title"
           :prop="head.key"
+          class="copy-btn"
           :width="head.minWidth"
+          @click="copyFn"
         >
           <template slot-scope="{ row, column, $index }">
             <component
@@ -38,86 +40,34 @@
           />
         </template>
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.$index, scope.row)"
+          <el-popconfirm
+            title="确定删除吗？"
+            @confirm="handleDelete(scope.$index, scope.row)"
           >
-            删除
-          </el-button>
+            <el-button @click.stop slot="reference">删除</el-button>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
-
-    <el-drawer
-      size="40%"
+    <Drawer
+      :curData="curData"
+      :value.sync="isDisabled"
       :visible.sync="showDrawer"
-      :append-to-body="true"
-      :show-close="false"
-      custom-class="drawer-box"
-    >
-      <el-descriptions
-        class="drawer-content"
-        :title="`${curData[meta.rowNameKey]}详情`"
-        :column="1"
-      >
-        <template slot="extra">
-          <i class="el-icon-edit" @click="handleEdit"></i>
-        </template>
-        <template v-for="head in headConf">
-          <el-descriptions-item
-            v-if="head.showPos.includes('drawer')"
-            :key="head.key"
-            :label="head.title"
-            labelClassName="label-box"
-          >
-            <component
-              :is="head.slot"
-              :isDisabled="isDisabled"
-              :head="head"
-              :data="curData"
-            >
-            </component>
-          </el-descriptions-item>
-        </template>
-      </el-descriptions>
-      <div class="drawer-footer" v-if="!isDisabled">
-        <el-button size="small" type="default" @click="showDrawer = false">
-          取消
-        </el-button>
-        <el-button size="small" type="primary" @click="handleUpdate"> 确定 </el-button>
-      </div>
-    </el-drawer>
-
-    <el-dialog :title="`新增${curData[meta.rowNameKey] || ''}`" :visible.sync="create">
-      <el-form :model="form">
-        <template v-for="head in headConf">
-          <el-form-item :key="head.key" :label="head.title" :label-width="head.width">
-            <component
-              :is="head.slot"
-              :isDisabled="isDisabled"
-              :head="head"
-              :data="curData"
-            >
-            </component>
-          </el-form-item>
-        </template>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
-      </div>
-    </el-dialog>
+    ></Drawer>
+    <Dialog :value.sync="isDisabled" :visible.sync="createDialog"></Dialog>
   </div>
 </template>
 <script>
 import headConf from "@/config/head.conf";
 import modules from "@/components/component";
+import Clipboard from "clipboard";
 
 export default {
   components: {
     ...modules,
     FilterTable: () => import("@/components/filter"),
+    Drawer: () => import("@/components/drawer"),
+    Dialog: () => import("@/components/dialog"),
   },
   computed: {
     meta() {
@@ -127,7 +77,7 @@ export default {
   data() {
     return {
       showDrawer: false,
-      create: false,
+      createDialog: false,
       curData: {},
       headConf,
       form: {},
@@ -166,10 +116,43 @@ export default {
       tableParams: { search: "" },
     };
   },
+  mounted() {
+    // headConf.forEach((item) => {
+    //   if (item.showPos.includes("table")) {
+    //     this.headConf.push(item);
+    //   }
+    //   if (item.showPos.includes("drawer")) {
+    //     this.drawerConf.push(item);
+    //   }
+    //   if (item.showPos.includes("search")) {
+    //     this.searchConf.push(item);
+    //   }
+    //   if (item.showPos.includes("dialog")) {
+    //     this.dialogConf.push(item);
+    //   }
+    // });
+  },
   methods: {
+    copyFn(text) {
+      if (!text) return;
+      const clipboard = new Clipboard(".copy-btn", {
+        text: () => text,
+      });
+      clipboard.on("success", () => {
+        this.$message({
+          message: "复制成功",
+          type: "success",
+        });
+        clipboard.destroy();
+      });
+      clipboard.on("error", () => {
+        this.$toast.error("当前浏览器不支持复制功能，请选中链接手动复制");
+      });
+      clipboard.onClick(event);
+    },
     handleFilter({ head, data, changeValue, type }) {
       console.log(head);
-      if (["create"].includes(head.key)) {
+      if (["createDialog"].includes(head.key)) {
         this[head.key] = true;
         this.isDisabled = false;
         return;
@@ -189,11 +172,7 @@ export default {
       }
       this.showDrawer = true;
     },
-    handleEdit(index, row) {
-      this.isDisabled = false;
-    },
     handleDelete(index, row) {},
-    handleUpdate() {},
   },
 };
 </script>

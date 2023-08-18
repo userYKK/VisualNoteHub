@@ -44,6 +44,7 @@ export default {
     };
   },
   mounted() {
+    if (!this.data) return;
     this.value = this.initValue || 0;
   },
   methods: {

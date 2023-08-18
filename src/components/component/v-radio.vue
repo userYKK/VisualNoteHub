@@ -33,6 +33,7 @@ export default {
   },
   mounted() {
     const { head, data } = this;
+    if (!data) return;
     this.value = data[head.key];
   },
 };

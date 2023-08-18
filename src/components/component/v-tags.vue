@@ -3,7 +3,7 @@
     <el-tag
       :key="tag"
       v-for="tag in dynamicTags"
-      :closable="!isDisabled"
+      :closable="parentType !== 'table'"
       :disable-transitions="false"
       @close="handleClose(tag)"
     >
@@ -11,7 +11,7 @@
     </el-tag>
     <el-input
       class="input-new-tag"
-      v-if="inputVisible"
+      v-if="parentType !== 'table' && inputVisible"
       v-model="inputValue"
       ref="saveTagInput"
       size="mini"
@@ -35,6 +35,10 @@ export default {
     isDisabled: {
       type: Boolean,
       default: false,
+    },
+    parentType: {
+      type: String,
+      default: "",
     },
   },
   watch: {

@@ -36,6 +36,7 @@ export default {
       return;
     }
     const { head, data } = this;
+    if (!data) return;
     this.value = data[head.key];
   },
   methods: {
