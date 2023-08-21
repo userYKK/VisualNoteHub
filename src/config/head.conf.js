@@ -195,7 +195,7 @@ export default [
         minWidth: 100,
         inputRows: 4,
         showPos: 'table;drawer;dialog',
-        tableSlot: "v-input",
+        tableSlot: "v-html",
         defaultSlot: "v-input",
     },
     {

@@ -38,9 +38,10 @@ export default {
   display: grid;
   grid-gap: 5px;
   grid-template-columns: repeat(auto-fill, 150px);
+  position: relative;
   .pos-right {
     position: absolute;
-    right: 20px;
+    right: 0;
   }
 }
 </style>

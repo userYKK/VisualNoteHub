@@ -1,54 +1,67 @@
 <template>
   <div>
-    <FilterTable @operateEvent="handleFilter"></FilterTable>
-    <el-table
-      :data="tableData"
-      @row-click="handleDetail"
-      header-align="center"
-      empty-text="暂无"
-    >
-      <el-table-column type="selection" width="55"> </el-table-column>
-      <template v-for="head in headConf">
-        <el-table-column
-          v-if="head.showPos.includes('table')"
-          :key="head.key"
-          :label="head.title"
-          :prop="head.key"
-          class="copy-btn"
-          :width="head.minWidth"
-          @click="copyFn"
-        >
-          <template slot-scope="{ row, column, $index }">
-            <component
-              :is="head.tableSlot"
-              :isDisabled="head.tableDisabled"
-              parentType="table"
-              :head="head"
-              :data="row"
+    <el-card class="box-card">
+      <FilterTable @operateEvent="handleFilter"></FilterTable>
+      <el-table
+        :data="tableData"
+        @row-click="handleDetail"
+        header-align="center"
+        empty-text="暂无"
+      >
+        <el-table-column type="selection" width="55"> </el-table-column>
+        <template v-for="head in headConf">
+          <el-table-column
+            v-if="head.showPos.includes('table')"
+            :key="head.key"
+            :label="head.title"
+            :prop="head.key"
+            class="copy-btn"
+            :width="head.minWidth"
+            @click="copyFn"
+          >
+            <template slot-scope="{ row, column, $index }">
+              <component
+                :is="head.tableSlot"
+                :isDisabled="head.tableDisabled"
+                parentType="table"
+                :head="head"
+                :data="row"
+              >
+              </component>
+            </template>
+          </el-table-column>
+        </template>
+        <el-table-column align="right" fixed="right" width="160">
+          <template slot="header" slot-scope="scope">
+            <el-input
+              @change="handleSearch"
+              v-model="tableParams.search"
+              size="mini"
+              placeholder="输入关键字搜索"
+            />
+          </template>
+          <template slot-scope="scope">
+            <el-popconfirm
+              title="确定删除吗？"
+              @confirm="handleDelete(scope.$index, scope.row)"
             >
-            </component>
+              <el-button @click.stop slot="reference">删除</el-button>
+            </el-popconfirm>
           </template>
         </el-table-column>
-      </template>
-      <el-table-column align="right" fixed="right" width="160">
-        <template slot="header" slot-scope="scope">
-          <el-input
-            @change="handleSearch"
-            v-model="tableParams.search"
-            size="mini"
-            placeholder="输入关键字搜索"
-          />
-        </template>
-        <template slot-scope="scope">
-          <el-popconfirm
-            title="确定删除吗？"
-            @confirm="handleDelete(scope.$index, scope.row)"
-          >
-            <el-button @click.stop slot="reference">删除</el-button>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
-    </el-table>
+      </el-table>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="tableParams.currentPage"
+        :page-sizes="[100, 200, 300, 400]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="400"
+      >
+      </el-pagination>
+    </el-card>
+
     <Drawer
       :curData="curData"
       :value.sync="isDisabled"
@@ -113,7 +126,7 @@ export default {
             "有没有B站网页版自动全屏的插件？本文介绍的用户脚本插件帮你解决哔哩哔哩怎么自动全屏的难题",
         },
       ],
-      tableParams: { search: "" },
+      tableParams: { search: "", currentPage: 1 },
     };
   },
   mounted() {
@@ -133,6 +146,8 @@ export default {
     // });
   },
   methods: {
+    handleSizeChange() {},
+    handleCurrentChange() {},
     copyFn(text) {
       if (!text) return;
       const clipboard = new Clipboard(".copy-btn", {
@@ -177,6 +192,10 @@ export default {
 };
 </script>
 <style lang="scss">
+.el-pagination {
+  margin-top: 20px;
+  text-align: right;
+}
 .el-date-editor.el-input,
 .el-date-editor.el-input__inner {
   width: 100%;
