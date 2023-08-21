@@ -1,0 +1,7 @@
+1. create-react-app 基于运用
+    安装脚手架
+    $ npm i create-react-app -g
+    检查安装情况
+    $ create-react-app --version
+2. 基于脚手架创建react工程化的项目
+$ create-react-app 项目名称
