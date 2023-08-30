@@ -1,10 +1,10 @@
 import React, { Suspense } from "react";
 import { Routes, Route, useNavigate, useLocation, useParams, useSearchParams } from "react-router-dom";
 import routes from "./routes";
-import { Mask } from "antd";
+import { Mask } from "antd-mobile";
 const Element = function Element(props) {
     let { component: Component, meta } = props;
-    let { title } = meta | {};
+    let { title } = meta || {};
     document.title = title
     const navigate = useNavigate();
     const location = useLocation();
@@ -14,7 +14,7 @@ const Element = function Element(props) {
 }
 
 export default function RouterView() {
-    return <Suspense fallback={<></>}>
+    return <Suspense fallback={<Mask visible={true} opacity="thick"></Mask>}>
         <Routes>
             {
                 routes.map((item, index) => {
