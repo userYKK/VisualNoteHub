@@ -1,9 +1,9 @@
 import React from "react";
-
+import Table from '../components/table/index.tsx';
+import HeadConf from "../config/head.conf";
 const Home = function Home(){
-    return <div className="home-box">
-        首页
-    </div>
+    return <Table head={HeadConf}>
+    </Table>
 }
 
 export default Home
