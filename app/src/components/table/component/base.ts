@@ -5,6 +5,8 @@ class CBase {
     this.HeadItemConf = prop;
     this.key = prop.key;
   }
+
+  getSelectList() {}
 }
 
 export default CBase;
