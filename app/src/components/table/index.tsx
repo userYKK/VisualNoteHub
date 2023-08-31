@@ -9,12 +9,14 @@ interface DataType {
   age: number;
   address: string;
   plImg: string;
+  plId: string;
 }
 const data: DataType[] = [];
-for (let i = 0; i < 46; i++) {
+for (let i = 0; i < 2; i++) {
   data.push({
     key: i,
     plImg: '',
+    plId: '<span style="color: red">q3qerse</span>',
     name: `Edward King ${i}`,
     age: 32,
     address: `London, Park Lane no. ${i}`,
@@ -22,11 +24,12 @@ for (let i = 0; i < 46; i++) {
 }
 const TableCom = function TableCom(props) {
   const {head} = props;
-  const headConf = head.map(item=>{
-    if(item.defaultSlot){
-      item.render =  ()=> {import ''};
-    }else if(item.tableSlot){
-
+  const headConf = head.map((item, idx)=>{
+    
+   if(item.tableSlot){
+    const render = require(`./component/${item.tableSlot}.tsx`).default;
+    render(null, {type: 'init', ...item})
+    item.render = render;
     }
     return item;
   })

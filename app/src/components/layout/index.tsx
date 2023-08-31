@@ -1,6 +1,6 @@
 // 整个视图和页面入口
 import React from 'react';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import RouterView from '../../router';
 import SideBar from './sidebar/index.tsx';
 
@@ -50,9 +50,9 @@ const LayoutCom: React.FC = function LayoutCom() {
         <Layout>
           <Header style={headerStyle}>Header</Header>
           <Content style={contentStyle}>
-            <HashRouter>
+            <Router>
               <RouterView />
-            </HashRouter>
+            </Router>
           </Content>
           <Footer style={footerStyle}>Footer</Footer>
         </Layout>
