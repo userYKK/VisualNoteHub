@@ -1,17 +1,15 @@
 import React from 'react';
-import CBase from './base.js';
+import { converFileSize } from '@/assets/utils.js';
+import CBase from './base.ts';
 
 class CFileSize extends CBase {
   render(text, record, index): React.ReactNode {
-    console.log(this);
-
-    const val = record[this.key] || '';
+    const val = converFileSize(record[this.key] || '');
     return (
       <>
-        <div dangerouslySetInnerHTML={{ __html: val }}></div>
+        <div>{val}</div>
       </>
     );
   }
 }
-
 export default CFileSize;
