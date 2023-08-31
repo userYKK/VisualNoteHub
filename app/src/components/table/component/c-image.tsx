@@ -1,12 +1,8 @@
 import React from "react";
 import { Image } from "antd";
-class CImage {
-    HeadItemConf: object = {};
-    key: string = ''
-    constructor(prop){
-        this.HeadItemConf = prop;
-        this.key = prop.key;
-    }
+import CBase from "./base.ts";
+
+class CImage extends CBase{
     render(text, record, index): React.ReactNode {
         console.log(this);
         const val = record[this.key] || 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png';

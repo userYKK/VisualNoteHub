@@ -35,7 +35,7 @@ export const HeadConf = [
         width: 100,
         showPos: 'table;drawer;search;dialog',
         tableDisabled: true,
-        tableSlot: "c-html",
+        tableSlot: "c-selectSpan",
         defaultSlot: "c-select",
         optionKey: 'typeId',
         optionTitle: 'typeName',
