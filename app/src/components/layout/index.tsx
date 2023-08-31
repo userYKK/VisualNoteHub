@@ -1,7 +1,7 @@
 // 整个视图和页面入口
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import RouterView from '../../router';
+import RouterView from '@/router';
 import SideBar from './sidebar/index.tsx';
 
 import { Layout, Space } from 'antd';

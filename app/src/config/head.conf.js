@@ -22,30 +22,30 @@ export const HeadConf = [
         //     />
         // }
     },
-    // {
-    //     title: '插件序号',
-    //     key: 'plNo',
-    //     width: 100,
-    //     showPos: 'table',
-    //     tableSlot: "c-html",
-    // },
-    // {
-    //     title: "插件类型",
-    //     key: "typeId",
-    //     width: 100,
-    //     showPos: 'table;drawer;search;dialog',
-    //     tableDisabled: true,
-    //     tableSlot: "c-selectSpan",
-    //     defaultSlot: "c-select",
-    //     optionKey: 'typeId',
-    //     optionTitle: 'typeName',
-    //     optionsApi: '/protype/pager',
-    //     optionsParams: {
-    //         start: 0,
-    //         length: 10000,
-    //         type: '1'
-    //     },
-    // },
+    {
+        title: '插件序号',
+        key: 'plNo',
+        width: 100,
+        showPos: 'table',
+        tableSlot: "c-html",
+    },
+    {
+        title: "插件类型",
+        key: "typeId",
+        width: 100,
+        showPos: 'table;drawer;search;dialog',
+        tableDisabled: true,
+        tableSlot: "c-html",
+        defaultSlot: "c-select",
+        optionKey: 'typeId',
+        optionTitle: 'typeName',
+        optionsApi: '/protype/pager',
+        optionsParams: {
+            start: 0,
+            length: 10000,
+            type: '1'
+        },
+    },
     // {
     //     title: "插件版块",
     //     key: "blockId",

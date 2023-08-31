@@ -11,7 +11,7 @@ import {
   PieChartOutlined,
 } from '@ant-design/icons';
 import { Button, Menu } from 'antd';
-import MenuData from "../../../config/menu.conf";
+import MenuData from "@/config/menu.conf";
 
 import type { MenuProps, MenuTheme } from 'antd/es/menu';
 

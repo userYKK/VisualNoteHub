@@ -1,5 +1,5 @@
-import * as TYPES from "../action-types";
-import _ from "../../assets/utils";
+import * as TYPES from "@/store/action-types";
+import _ from "@/assets/utils";
 let initial = {
     info: null
 }

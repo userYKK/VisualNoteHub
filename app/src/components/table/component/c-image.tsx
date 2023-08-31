@@ -1,19 +1,23 @@
 import React from "react";
-
-import { Image } from 'antd';
-let HeadItemConf = {key: ''}
-const Html = function Html(text, record, index){
-    if(record.type === 'init'){
-        HeadItemConf = record
-   }
-    const val = record[HeadItemConf.key] || '';
-    
-    return (
-        <Image
+import { Image } from "antd";
+class CImage {
+    HeadItemConf: object = {};
+    key: string = ''
+    constructor(prop){
+        this.HeadItemConf = prop;
+        this.key = prop.key;
+    }
+    render(text, record, index): React.ReactNode {
+        console.log(this);
+        const val = record[this.key] || 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png';
+        return (<>
+                 <Image
             width={200}
-            src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+            src=""
         />
-    )
+         </>
+        )
+    }
 }
 
-export default Html
+export default CImage
