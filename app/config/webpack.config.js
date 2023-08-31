@@ -686,6 +686,7 @@ module.exports = function (webpackEnv) {
           }),
           configOverwrite: {
             compilerOptions: {
+              strict: false,
               sourceMap: isEnvProduction
                 ? shouldUseSourceMap
                 : isEnvDevelopment,

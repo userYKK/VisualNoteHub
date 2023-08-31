@@ -1,5 +1,5 @@
 class CBase {
-  HeadItemConf: object = {};
+  HeadItemConf: { [key: string]: string } = {};
   key: string = '';
   constructor(prop) {
     this.HeadItemConf = prop;
