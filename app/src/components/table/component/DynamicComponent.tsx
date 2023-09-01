@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 /**
  * @desc the dynamic component is used to render various component dynamically
@@ -8,14 +8,11 @@ import React from "react";
  *    ...rest: the props to be passed into the new component
  * }
  */
-const DynamicComponent = ({ is, useDefaultPath = true, ...rest }) => {
-  return React.createElement(
-    useDefaultPath ? require(`./${is}.js`).default : is,
-    {
-      ...rest,
-    }
-  );
+const DynamicComponent = ({ is, useDefaultPath = true, conf, ...rest }) => {
+  const path = require(`./${is}.tsx`).default;
+  return React.createElement(useDefaultPath ? new path(conf) : is, {
+    ...rest,
+  });
 };
 
 export default DynamicComponent;
-

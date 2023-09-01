@@ -4,12 +4,14 @@ import CBase from './base.ts';
 
 class CDateSpan extends CBase {
   render(text, record, index): React.ReactNode {
-    console.log(this);
+    console.log(text, record, index, '===111222');
 
-    const val = filterDate(record[this.key] || '');
+    const { width } = this.HeadItemConf;
+
+    const val = filterDate(text, 'year');
     return (
       <>
-        <div>{val}</div>
+        <div style={{ width: `${this.width}px` }}>{val}</div>
       </>
     );
   }

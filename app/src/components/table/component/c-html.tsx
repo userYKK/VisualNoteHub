@@ -4,19 +4,16 @@ import CBase from './base.ts';
 
 class CHtml extends CBase {
   render(text, record, index): React.ReactNode {
-    console.log(this);
-
-    const val = record[this.key] || '';
-    if (val.length > 20) {
+    if (text?.length > 20) {
       return (
-        <Tooltip title={val} trigger="hover">
-          <div dangerouslySetInnerHTML={{ __html: val }}></div>
+        <Tooltip title={text} trigger="hover">
+          <div dangerouslySetInnerHTML={{ __html: text }}></div>
         </Tooltip>
       );
     }
     return (
       <>
-        <div dangerouslySetInnerHTML={{ __html: val }}></div>
+        <div dangerouslySetInnerHTML={{ __html: text }}></div>
       </>
     );
   }
@@ -25,14 +22,12 @@ class CHtml extends CBase {
 // const Html = function Html(text, record, index){
 //     if(record.type === 'init'){
 //         HeadItemConf = record;
-//         console.log(count);
 //         count++
 
 //    }
 //    if(!HeadItemConf.key) return <></>;
 //     const key = HeadItemConf.key;
 //     const val = record[key] || '';
-//     console.log(key);
 
 //     return (<>
 //             <div dangerouslySetInnerHTML={{ __html: val }}></div>

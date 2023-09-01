@@ -15,13 +15,9 @@ class CHtml extends CBase {
       });
     }
   }
-  handleChange(value: string[]) {
-    console.log(`selected ${value}`);
-  }
+  handleChange(value: string[]) {}
   render(text, record, index): React.ReactNode {
-    console.log(this);
-
-    const val = record[this.key] || '';
+    const val = text || '';
     return (
       <>
         <Select

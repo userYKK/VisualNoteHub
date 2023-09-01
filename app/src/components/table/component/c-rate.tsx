@@ -4,13 +4,18 @@ import CBase from './base.ts';
 
 class CRate extends CBase {
   render(text, record, index): React.ReactNode {
-    console.log(this);
-
-    const val = record[this.key] || 0;
+    const val = text || 0;
     const disabled = false;
     return (
       <>
-        <Rate allowHalf defaultValue={val} disabled={disabled} />
+        <Rate
+          allowHalf
+          defaultValue={val}
+          disabled={disabled}
+          style={{
+            fontSize: '14px',
+          }}
+        />
       </>
     );
   }

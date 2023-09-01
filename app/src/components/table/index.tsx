@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
-import { Table } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import React, { useRef, useState } from 'react';
+
 import type { TableRowSelection } from 'antd/es/table/interface';
+
+import { SearchOutlined } from '@ant-design/icons';
+import type { InputRef } from 'antd';
+import { Button, Input, Space, Table } from 'antd';
+import type { ColumnType, ColumnsType } from 'antd/es/table';
 
 interface DataType {
   plId: string;
@@ -38,16 +42,34 @@ for (let i = 0; i < 2; i++) {
     info: '有没有B站网页版自动全屏的插件？本文介绍的用户脚本插件帮你解决哔哩哔哩怎么自动全屏的难题',
   });
 }
+
+function getRenderCom(comName, data = {}) {
+  const Render = require(`./component/${comName}.tsx`).default;
+  return new Render({ type: 'init', ...data });
+}
+
 const TableCom = function TableCom(props) {
-  const { head } = props;
-  const headConf = head.map((item, idx) => {
-    if (item.tableSlot) {
-      const Render = require(`./component/${item.tableSlot}.tsx`).default;
-      const _this = new Render({ type: 'init', ...item });
-      item.render = _this.render.bind(_this);
-    }
-    return item;
-  });
+  const { head, emitEvent } = props;
+  const headConf = head
+    .filter((item) => item.showPos?.includes?.('table'))
+    .map((item, idx) => {
+      const params = {
+        ...item,
+        emitEvent,
+      };
+      if (item.tableSlot) {
+        const _this = getRenderCom(item.tableSlot, params);
+        item.render = _this.render.bind(_this);
+      }
+      if (item.tableHeadeSlot) {
+        const _this = getRenderCom(item.tableHeadeSlot, params);
+        item = {
+          ...item,
+          title: _this.render.bind(_this),
+        };
+      }
+      return item;
+    });
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
@@ -94,13 +116,15 @@ const TableCom = function TableCom(props) {
     ],
   };
   return (
-    <Table
-      scroll={{ x: '100%' }}
-      rowSelection={rowSelection}
-      rowKey={(record) => record.plId}
-      columns={headConf}
-      dataSource={data}
-    />
+    <div>
+      <Table
+        scroll={{ y: '60vh' }}
+        rowSelection={rowSelection}
+        rowKey={(record) => record.plId}
+        columns={headConf}
+        dataSource={data}
+      />
+    </div>
   );
 };
 export default TableCom;

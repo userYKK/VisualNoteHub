@@ -1,27 +1,21 @@
 // 整个视图和页面入口
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import RouterView from '@/router';
 import SideBar from './sidebar/index.tsx';
+import BreadCrumb from './breadcrumb/index.tsx';
+import Head from './head/index.tsx';
 
 import { Layout, Space } from 'antd';
-const { Header, Footer, Sider, Content } = Layout;
-
-const headerStyle: React.CSSProperties = {
-  textAlign: 'center',
-  color: '#fff',
-  height: 64,
-  paddingInline: 50,
-  lineHeight: '64px',
-  backgroundColor: '#7dbcea',
-};
+const { Footer, Sider, Content } = Layout;
 
 const contentStyle: React.CSSProperties = {
   textAlign: 'center',
   minHeight: 120,
   lineHeight: '120px',
   color: '#fff',
-  backgroundColor: '#108ee9',
+  backgroundColor: '#fff',
+  padding: '0 20px',
 };
 
 const siderStyle: React.CSSProperties = {
@@ -30,30 +24,32 @@ const siderStyle: React.CSSProperties = {
   color: '#fff',
   backgroundColor: '#3ba0e9',
 };
-
 const footerStyle: React.CSSProperties = {
   textAlign: 'center',
   color: '#fff',
-  backgroundColor: '#7dbcea',
+  backgroundColor: '#0f64b5',
 };
-
-
-
-const LayoutCom: React.FC = function LayoutCom() {
-  
+const LayoutCom = function LayoutCom() {
+  const [openSideBar, setSideBarOpen] = useState(false);
   return (
     <Space direction="vertical" style={{ width: '100%' }} size={[0, 48]}>
       <Layout>
-        <Sider style={siderStyle}>
-          <SideBar/>
+        <Sider style={siderStyle} collapsed={openSideBar}>
+          <SideBar />
         </Sider>
         <Layout>
-          <Header style={headerStyle}>Header</Header>
-          <Content style={contentStyle}>
-            <Router>
-              <RouterView />
-            </Router>
-          </Content>
+          <Space direction="vertical" size={[0, 20]}>
+            <Head
+              collapsed={openSideBar}
+              change={() => setSideBarOpen(!openSideBar)}
+            ></Head>
+            <BreadCrumb></BreadCrumb>
+            <Content style={contentStyle}>
+              <Router>
+                <RouterView />
+              </Router>
+            </Content>
+          </Space>
           <Footer style={footerStyle}>Footer</Footer>
         </Layout>
       </Layout>

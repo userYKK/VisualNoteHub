@@ -4,13 +4,12 @@ import CBase from './base.ts';
 
 class CImage extends CBase {
   render(text, record, index): React.ReactNode {
-    console.log(this);
     const val =
-      record[this.key] ||
+      text ||
       'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png';
     return (
       <>
-        <Image width={200} src={val} />
+        <Image width={this.width} src={val} />
       </>
     );
   }
