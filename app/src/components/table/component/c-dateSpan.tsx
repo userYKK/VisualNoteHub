@@ -1,6 +1,6 @@
 import React from 'react';
 import { filterDate } from '@/assets/utils.js';
-import CBase from './base.ts';
+import CBase from './base.tsx';
 
 class CDateSpan extends CBase {
   render(text, record, index): React.ReactNode {
@@ -11,7 +11,7 @@ class CDateSpan extends CBase {
     const val = filterDate(text, 'year');
     return (
       <>
-        <div style={{ width: `${this.width}px` }}>{val}</div>
+        <div>{val}</div>
       </>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tag, Tooltip } from 'antd';
-import CBase from './base.ts';
+import CBase from './base.tsx';
 
 const tagStyle: React.CSSProperties = {
   maxWidth: 80,
@@ -15,18 +15,22 @@ class CTags extends CBase {
     const tags = val?.split?.(',');
     return (
       <>
-        {tags?.map((tag, idx) => {
+        {tags?.map((tag, index) => {
           if (tag.length > 5) {
             return (
               <Tooltip title={tag} trigger="hover">
-                <Tag key={tag} style={tagStyle} color={this.HeadItemConf.color}>
+                <Tag
+                  key={index}
+                  style={tagStyle}
+                  color={this.HeadItemConf.color}
+                >
                   {tag}
                 </Tag>
               </Tooltip>
             );
           }
           return (
-            <Tag key={tag} style={tagStyle} color={this.HeadItemConf.color}>
+            <Tag key={index} style={tagStyle} color={this.HeadItemConf.color}>
               {tag}
             </Tag>
           );

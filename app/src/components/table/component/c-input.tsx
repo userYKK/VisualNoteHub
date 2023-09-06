@@ -1,23 +1,22 @@
 import React from 'react';
 import { Input, Space } from 'antd';
-import CBase from './base.ts';
-
-const { Search } = Input;
+import CBase from './base.tsx';
 
 class CSearch extends CBase {
   emitType: string = 'searchTable';
-  onSearch(val) {
+  onChange(val) {
     this.emit(val);
   }
   render(text, record, index): React.ReactNode {
+    if (!record.isEdit) {
+      return <div>{text}</div>;
+    }
     return (
-      <>
-        <Search
-          placeholder="input search text"
-          onSearch={this.onSearch.bind(this)}
-          style={{ width: 200 }}
-        />
-      </>
+      <Input
+        placeholder="请输入内容"
+        defaultValue={text}
+        onChange={this.onChange}
+      />
     );
   }
 }

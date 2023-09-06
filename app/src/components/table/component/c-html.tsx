@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tooltip } from 'antd';
-import CBase from './base.ts';
+import CBase from './base.tsx';
 
 class CHtml extends CBase {
   render(text, record, index): React.ReactNode {

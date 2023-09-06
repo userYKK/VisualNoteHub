@@ -5,6 +5,7 @@ import RouterView from '@/router';
 import SideBar from './sidebar/index.tsx';
 import BreadCrumb from './breadcrumb/index.tsx';
 import Head from './head/index.tsx';
+import Tabs from './tabs/index.tsx';
 
 import { Layout, Space } from 'antd';
 const { Footer, Sider, Content } = Layout;
@@ -43,6 +44,8 @@ const LayoutCom = function LayoutCom() {
               collapsed={openSideBar}
               change={() => setSideBarOpen(!openSideBar)}
             ></Head>
+            {/* <Space direction="vertical" size={[0, 20]}> */}
+            <Tabs></Tabs>
             <BreadCrumb></BreadCrumb>
             <Content style={contentStyle}>
               <Router>
@@ -50,6 +53,7 @@ const LayoutCom = function LayoutCom() {
               </Router>
             </Content>
           </Space>
+          {/* </Space> */}
           <Footer style={footerStyle}>Footer</Footer>
         </Layout>
       </Layout>

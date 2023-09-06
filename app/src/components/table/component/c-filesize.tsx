@@ -1,6 +1,6 @@
 import React from 'react';
 import { converFileSize } from '@/assets/utils.js';
-import CBase from './base.ts';
+import CBase from './base.tsx';
 
 class CFileSize extends CBase {
   render(text, record, index): React.ReactNode {

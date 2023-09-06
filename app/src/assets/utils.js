@@ -47,3 +47,5 @@ export function converFileSize(limit) {
     }
     return sizestr;
 }
+
+export default { clone }

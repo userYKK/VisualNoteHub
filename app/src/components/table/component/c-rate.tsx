@@ -1,6 +1,6 @@
 import React from 'react';
 import { Rate } from 'antd';
-import CBase from './base.ts';
+import CBase from './base.tsx';
 
 class CRate extends CBase {
   render(text, record, index): React.ReactNode {

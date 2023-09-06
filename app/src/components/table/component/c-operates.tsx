@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Popconfirm, message } from 'antd';
-import CBase from './base.ts';
+import CBase from './base.tsx';
 
 class CBtn extends CBase {
   emitType: string = 'operateTable';
@@ -19,7 +19,7 @@ class CBtn extends CBase {
     return (
       <>
         {btns?.length &&
-          btns.map((btn) => {
+          btns.map((btn, index) => {
             if (btn.operateType === 'del') {
               return (
                 <Popconfirm
@@ -31,6 +31,7 @@ class CBtn extends CBase {
                   cancelText="取消"
                 >
                   <Button
+                    key={index}
                     type={btn.type}
                     danger={btn.danger}
                     onClick={this.clickFn.bind(this, { record, index, btn })}
@@ -42,6 +43,7 @@ class CBtn extends CBase {
             }
             return (
               <Button
+                key={index}
                 type={btn.type}
                 danger={btn.danger}
                 onClick={this.clickFn.bind(this, { record, index, btn })}

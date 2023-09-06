@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Drawer, Space } from 'antd';
+import { Button, Drawer, Space, Descriptions } from 'antd';
+import { EditOutlined } from '@ant-design/icons';
 // import DynamicComponent from '../table/component/DynamicComponent.tsx';
 
 const DrawerCom = function DrawerCom(props) {
@@ -24,7 +25,7 @@ const DrawerCom = function DrawerCom(props) {
   const onClose = () => {
     props.close();
   };
-  const size = 'large';
+  const size = 'small';
   return (
     <Drawer
       title={`${size} Drawer`}
@@ -32,7 +33,13 @@ const DrawerCom = function DrawerCom(props) {
       size={size}
       onClose={onClose}
       open={props.open}
-      extra={<Space></Space>}
+      extra={
+        <Space>
+          <Button type="primary" onClick={() => props.edit()}>
+            <EditOutlined />
+          </Button>
+        </Space>
+      }
       footer={
         <Space>
           <Button onClick={onClose}>Cancel</Button>
@@ -52,11 +59,14 @@ const DrawerCom = function DrawerCom(props) {
         //     />
         //   );
         // })
-        list?.map((item) => {
+        list?.map((item, index) => {
           return (
-            <div>
+            <div key={index}>
               <div className="eidt-title">{item.title}</div>
-              {item.render(props.data[item.dataIndex], props.data)}
+              {item.render(props.data[item.dataIndex], {
+                ...props.data,
+                isEdit: props.isEdit,
+              })}
             </div>
           );
         })

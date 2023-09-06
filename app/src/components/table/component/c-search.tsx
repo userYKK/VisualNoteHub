@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input, Space } from 'antd';
-import CBase from './base.ts';
+import CBase from './base.tsx';
 
 const { Search } = Input;
 

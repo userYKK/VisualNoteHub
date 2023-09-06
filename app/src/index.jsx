@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from "./App.jsx";
+import { Provider } from 'react-redux';
+import App from './App.jsx';
+import store from './store';
 
 // antd
 // import { ConfigProvider } from "antd-mobile";
@@ -9,7 +11,10 @@ import App from "./App.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <>
-        <App/>
-    </>
+  <>
+    <Provider store={store}>
+      <App />
+    </Provider>
+    ,
+  </>
 );

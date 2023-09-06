@@ -3,7 +3,7 @@ import { InboxOutlined } from '@ant-design/icons';
 import type { UploadProps } from 'antd';
 import { message, Upload } from 'antd';
 
-import CBase from './base.ts';
+import CBase from './base.tsx';
 
 const { Dragger } = Upload;
 

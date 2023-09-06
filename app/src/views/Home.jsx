@@ -6,13 +6,15 @@ import { HeadConf } from '@/config/head.conf';
 const Home = function Home() {
   // drawer
   const [openDrawer, setDrawerOpen] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   const [curData, setCurData] = useState({});
-  const handleOperateFn = (head, data) => {
+  const handleOperateFn = (head, data, isEdit = false) => {
     const { record = {}, btn } = data;
     switch (btn.operateType) {
       case 'edit':
-        console.log(record, '=111');
+        // record.isEdit = isEdit;
+        setIsEdit(isEdit);
         setCurData(record);
         setDrawerOpen(true);
         break;
@@ -20,6 +22,20 @@ const Home = function Home() {
       default:
         break;
     }
+  };
+  const handleEdit = function () {
+    handleOperateFn(
+      {},
+      { record: curData, btn: { operateType: 'edit' } },
+      true
+    );
+  };
+  const closeDrawer = function () {
+    // curData.isEdit = false;
+
+    setCurData({});
+    setIsEdit(false);
+    setDrawerOpen(false);
   };
   const handleEmitEvent = function handleEmitEvent(data) {
     const { emitType, HeadItemConf } = this;
@@ -41,7 +57,9 @@ const Home = function Home() {
         conf={HeadConf}
         open={openDrawer}
         data={curData}
-        close={() => setDrawerOpen(false)}
+        isEdit={isEdit}
+        close={closeDrawer}
+        edit={handleEdit}
       ></Drawer>
     </>
   );

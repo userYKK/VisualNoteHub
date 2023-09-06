@@ -208,7 +208,7 @@ export const HeadConf = [
   },
   {
     title: '',
-    width: 50,
+    width: 150,
     tableSlot: 'c-operates',
     defaultSlot: 'c-btn',
     showPos: 'table',
