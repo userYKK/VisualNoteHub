@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
-import {
-  AppstoreOutlined,
-  ContainerOutlined,
-  DesktopOutlined,
-  MailOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  PieChartOutlined,
-} from '@ant-design/icons';
+import * as Icon from '@ant-design/icons';
 import { Button, Menu } from 'antd';
 import MenuData from '@/config/menu.conf';
-
 import type { MenuProps, MenuTheme } from 'antd/es/menu';
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -28,7 +19,15 @@ function getItem(
     children,
   } as MenuItem;
 }
+
+function getIcon(iconName: string = 'MailOutlined') {
+  return React.createElement(Icon[iconName]);
+}
+
 function getItems(list) {
+  if (!list?.length) {
+    return;
+  }
   return list.map((item) => {
     if (item.category) {
       const categoryList = item.category.map((category) => {
@@ -40,19 +39,19 @@ function getItems(list) {
           'group'
         );
       });
-      return getItem(item.title, item.idx, <MailOutlined />, categoryList);
+      return getItem(item.title, item.idx, getIcon(item.icon), categoryList);
     }
 
     if (item.children) {
       return getItem(
         item.title,
         item.idx,
-        <MailOutlined />,
+        getIcon(item.icon),
         getItems(item.children)
       );
     }
 
-    return getItem(item.title, item.idx, <PieChartOutlined />, item.children);
+    return getItem(item.title, item.idx, getIcon(item.icon));
   });
 }
 

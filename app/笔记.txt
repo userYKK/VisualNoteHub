@@ -1,9 +1,32 @@
+1. 当前以及未来的前端开发，一定是：组件化、模块化
+    @1 有利于团队协作开发
+    @2 便于组件的复用：提高开发效率，方便后期维护，减少页面中的冗余代码
+    ...
+2. 如何划分组件
+    业务组件：针对项目需求封装的
+        @1 普通业务组件「没啥复用性，只是单独拆出来的一个模块」
+        @2 同用业务组件「具备复用性」
+    功能组件：适用于多个项目「例如：UI组件库中的组件」
+        @1 通用组件功能
+
+因为组件化开发，必然会带来“工程化”的处理
+    也就是基于 webpack 等工具「vite/rollup/turbopack...」
+    + 实现组件的合并、压缩、打包等
+    + 代码编译、兼容、校验等
+    + ...
+
+====================
+
+React 的工程化/组件化开发
+    可以基于 webpack 搭建一套工程化打包的架子，但是非常麻烦复杂；React 官方提供了一个脚手架：crate-react-app
+    + 脚手架：基于他创建项目，默认把 webpack 的打包规则处理好了，把一些项目需要的基本文件也创建好了
+
 1. create-react-app 基于运用
     安装脚手架
-    $ npm i create-react-app -g
+    $ npm i create-react-app -g 「mac 前面需要设置 sudo」
     检查安装情况
     $ create-react-app --version
-2. 基于脚手架创建react工程化的项目
+2. 基于脚手架创建 React 工程化的项目
 $ create-react-app 项目名称
 
 
@@ -19,3 +42,37 @@ mvc：model数据层 + view视图层 + control控制层
 ”单项驱动“
 
 mvvm：
+
+
+
+
+
+1. 关于jsx底层处理机制
+    第一步：把我们编写的JSX语法，编译为虚拟DOM对象「virtualDOM」
+        虚拟DOM对象：框架自己内部构建的一套对象体系「对象的相关成员都是React内部规定的」，基于这些属性描述出，我们所构建视图中的DOM节点的相关特征
+        @1 基于 babel-preset-react-app 把JSX编译为 React.createElement(...)这种格式
+            只要是元素节点，必然会基于 createElement 进行处理
+            React.createElement(ele, props, ...children)
+            + ele: 元素标签名或组件
+            + props: 元素属性集合（对象）「如果没有设置任何属性，默认值为 null」
+            + children: 第三个及以后的参数，都是当前元素的子节点
+
+        @2 再把 createElement 方法执行，创建出virtualDom虚拟DOM对象「也称为：JSX元素，JSX对象，ReactChild对象」
+        virtualDom = {
+            $$typeof: Symbol(react.element),
+            ref: null,
+            key: null,
+            type: 标签名|组件名
+            // 存储了元素的相关属性
+            props:{
+                children: 子节点信息
+            }
+        }
+
+
+
+    第二部：把virtualDOM渲染为真实DOM
+        真实DOM对象：浏览器页面中，最后渲染出来，让用户看见的DOM元素
+    补充说明：第一次渲染页面是直接从virtualDOM——>真实DOM；但后期视图更新的时候，需要经过DOM-DIFF的对比，计算出补丁包PATCH「两次视图差异部分」，把PATCH补丁包进行渲染
+    数据更新：(按照最新的数据，把JSX重新编译为全新的virtualDOM【全部重新编译一遍】)拿新的虚拟DOM和之前缓存的虚拟DOM进行对比，计算出PATCH补丁包，最后只渲染补丁包「避免性能浪费」
+
