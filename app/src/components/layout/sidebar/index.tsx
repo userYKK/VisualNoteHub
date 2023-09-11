@@ -3,24 +3,28 @@ import * as Icon from '@ant-design/icons';
 import { Button, Menu } from 'antd';
 import MenuData from '@/config/menu.conf';
 import type { MenuProps, MenuTheme } from 'antd/es/menu';
-
+import { Link } from 'react-router-dom';
+import { BrowserRouter, withRouter } from 'react-router-dom';
 type MenuItem = Required<MenuProps>['items'][number];
 
 function getItem(
   label: React.ReactNode,
   key?: React.Key | null,
   icon?: React.ReactNode,
-  children?: MenuItem[]
+  children?: MenuItem[],
+  type?: 'group'
 ): MenuItem {
   return {
     label,
     key,
     icon,
     children,
+    type,
   } as MenuItem;
 }
 
-function getIcon(iconName: string = 'MailOutlined') {
+function getIcon(iconName: string) {
+  if (!iconName) return '';
   return React.createElement(Icon[iconName]);
 }
 
@@ -44,14 +48,18 @@ function getItems(list) {
 
     if (item.children) {
       return getItem(
-        item.title,
+        <Link to={item.jump}>{item.title}</Link>,
         item.idx,
         getIcon(item.icon),
         getItems(item.children)
       );
     }
 
-    return getItem(item.title, item.idx, getIcon(item.icon));
+    return getItem(
+      <Link to={item.jump}>{item.title}</Link>,
+      item.idx,
+      getIcon(item.icon)
+    );
   });
 }
 

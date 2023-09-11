@@ -1,6 +1,6 @@
 // 整个视图和页面入口
 import React, { useState } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import RouterView from '@/router';
 import SideBar from './sidebar/index.tsx';
 import BreadCrumb from './breadcrumb/index.tsx';
@@ -34,29 +34,29 @@ const LayoutCom = function LayoutCom() {
   const [openSideBar, setSideBarOpen] = useState(false);
   return (
     <Space direction="vertical" style={{ width: '100%' }} size={[0, 48]}>
-      <Layout>
-        <Sider style={siderStyle} collapsed={openSideBar}>
-          <SideBar />
-        </Sider>
+      <BrowserRouter>
         <Layout>
-          <Space direction="vertical" size={[0, 20]}>
-            <Head
-              collapsed={openSideBar}
-              change={() => setSideBarOpen(!openSideBar)}
-            ></Head>
-            {/* <Space direction="vertical" size={[0, 20]}> */}
-            <Tabs></Tabs>
-            <BreadCrumb></BreadCrumb>
-            <Content style={contentStyle}>
-              <Router>
+          <Sider style={siderStyle} collapsed={openSideBar}>
+            <SideBar />
+          </Sider>
+          <Layout>
+            <Space direction="vertical" size={[0, 20]}>
+              <Head
+                collapsed={openSideBar}
+                change={() => setSideBarOpen(!openSideBar)}
+              ></Head>
+              {/* <Space direction="vertical" size={[0, 20]}> */}
+              <Tabs></Tabs>
+              <BreadCrumb></BreadCrumb>
+              <Content style={contentStyle}>
                 <RouterView />
-              </Router>
-            </Content>
-          </Space>
-          {/* </Space> */}
-          <Footer style={footerStyle}>Footer</Footer>
+              </Content>
+            </Space>
+            {/* </Space> */}
+            <Footer style={footerStyle}>Footer</Footer>
+          </Layout>
         </Layout>
-      </Layout>
+      </BrowserRouter>
     </Space>
   );
 };

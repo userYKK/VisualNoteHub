@@ -5,51 +5,8 @@ export default [
         icon: 'HomeOutlined',
         role: '',
         disabled: '',
-        jump: '/home',
-        idx: 'menu_1',
-        category: [
-            {
-                title: '分组一',
-                children: [
-                    {
-                        title: '选项1',
-                        jump: '',
-                        idx: 'menu_1-1',
-                        children: [
-                            {
-                                title: '选项32',
-                                jump: '',
-                                idx: 'menu_11',
-                            }, {
-                                title: '选项31',
-                                jump: '',
-                                idx: 'menu_22',
-                            },
-                        ],
-                    },
-                    {
-                        title: '选项2',
-                        jump: '',
-                        idx: 'menu_1-2',
-                    },
-                ],
-            },
-            {
-                title: '分组二',
-                children: [
-                    {
-                        title: '选项3',
-                        jump: '',
-                        idx: 'menu_2',
-                    },
-                    {
-                        title: '选项4',
-                        jump: '',
-                        idx: 'menu_3',
-                    },
-                ],
-            },
-        ],
+        jump: '/dashboard',
+        idx: 'dashboard',
     },
     {
         title: '文档',
@@ -57,17 +14,18 @@ export default [
         role: '',
         icon: 'FileExcelOutlined',
         disabled: '',
-        jump: '/document',
+        jump: '/home',
+        idx: 'home',
         children: [
             {
                 title: '选项3',
-                jump: '',
-                idx: 'menu_4'
+                jump: '/home',
+                idx: 'home'
             },
             {
                 title: '选项4',
-                jump: '',
-                idx: 'menu_5',
+                jump: '/home',
+                idx: 'home',
             },
         ],
     },
@@ -77,8 +35,8 @@ export default [
         role: '',
         icon: 'SendOutlined',
         disabled: '',
-        jump: '/guid',
-        idx: 'menu_6',
+        jump: '/guide',
+        idx: 'guide',
     },
     {
         title: '图标',
@@ -86,8 +44,8 @@ export default [
         role: '',
         icon: 'LockOutlined',
         disabled: '',
-        jump: '/icon',
-        idx: 'menu_7',
+        jump: '/icons',
+        idx: 'icons',
     },
     {
         title: '组件',
@@ -95,17 +53,17 @@ export default [
         role: '',
         icon: 'LockOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        jump: '/components',
+        idx: 'components',
     },
     {
         title: '图表',
         cla: '',
         role: '',
-        icon: 'LockOutlined',
+        icon: 'BarChartOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        jump: '/chart',
+        idx: 'chart',
     },
     {
         title: '路由嵌套',
@@ -113,17 +71,49 @@ export default [
         role: '',
         icon: 'LockOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        category: [
+            {
+                title: '分组1',
+                children: [
+                    {
+                        title: '分组1-1',
+                        jump: '/home',
+                        idx: 'home-1'
+                    },
+                    {
+                        title: '分组1-2',
+                        children: [
+                            {
+                                title: '选项1-2-1',
+                                jump: '/home',
+                                idx: 'home',
+                            }, {
+                                title: '选项1-2-2',
+                                jump: '/home',
+                                idx: 'home',
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                title: '分组2',
+                children: [{
+                    title: '分组2-1'
+                }, {
+                    title: '分组2-2'
+                }]
+            },
+        ],
     },
     {
         title: 'Table',
         cla: '',
         role: '',
-        icon: 'LockOutlined',
+        icon: 'TableOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        jump: '/table',
+        idx: 'table',
     },
     {
         title: '综合实例',
@@ -131,8 +121,8 @@ export default [
         role: '',
         icon: 'LockOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        jump: '/example',
+        idx: 'example',
     },
     {
         title: 'Tab',
@@ -140,8 +130,8 @@ export default [
         role: '',
         icon: 'LockOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        jump: '/tab',
+        idx: 'tab',
     },
     {
         title: '错误页面',
@@ -149,8 +139,8 @@ export default [
         role: '',
         icon: 'LockOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        jump: '/404',
+        idx: '404',
     },
     {
         title: '错误日志',
@@ -158,8 +148,8 @@ export default [
         role: '',
         icon: 'LockOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        jump: '/error',
+        idx: 'error',
     },
     {
         title: 'Excel',
@@ -167,8 +157,8 @@ export default [
         role: '',
         icon: 'LockOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        jump: '/excel',
+        idx: 'excel',
     },
     {
         title: 'Zip',
@@ -176,8 +166,8 @@ export default [
         role: '',
         icon: 'LockOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        jump: '/zip',
+        idx: 'zip',
     },
     {
         title: 'PDF',
@@ -185,8 +175,8 @@ export default [
         role: '',
         icon: 'LockOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        jump: '/pdf',
+        idx: 'pdf',
     },
     {
         title: '换肤',
@@ -194,8 +184,8 @@ export default [
         role: '',
         icon: 'LockOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        jump: '/skin',
+        idx: 'skin',
     },
     {
         title: 'Clipboard',
@@ -203,8 +193,8 @@ export default [
         role: '',
         icon: 'CopyOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        jump: '/copy',
+        idx: 'copy',
     },
     {
         title: '国际化',
@@ -212,8 +202,8 @@ export default [
         role: '',
         icon: 'DribbbleOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        jump: '/iin8',
+        idx: 'iin8',
     },
     {
         title: '外链',
@@ -221,7 +211,7 @@ export default [
         role: '',
         icon: 'LinkOutlined',
         disabled: '',
-        jump: '/role',
-        idx: 'menu_7',
+        jump: '/link',
+        idx: 'link',
     },
 ];

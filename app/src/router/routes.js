@@ -1,7 +1,7 @@
 import { lazy } from "react";
 // import { Home } from "@/views/Home";
 const routes = [{
-    path: '/test',
+    path: '/home',
     component: lazy(() => import('@/views/Home')),
     meta: {
         title: '列表'
